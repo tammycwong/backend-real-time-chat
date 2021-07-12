@@ -8,6 +8,7 @@ const addUser = ({id, name, room}) => {
     const existingUser = users.find((user) => user.room === room && user.name === name);
     //go through users array and find specific user
     //if user is trying to sign in with same user name and room, it is forbidden
+    if(!name || !room) return {error: "Username and room are required."};
     if(existingUser) {
         return {error: 'Username is taken'}
     }
@@ -25,10 +26,8 @@ const removeUser = (id) => {
     }
 }
 
-const getUser = () => {
+const getUser = (id) => users.find((user) => user.id === id);
 
-}
+const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
-const getUsersInRoom = () => {
-
-}
+module.exports = {addUser, removeUser, getUser, getUsersInRoom};
